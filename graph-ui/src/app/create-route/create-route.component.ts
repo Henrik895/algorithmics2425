@@ -92,7 +92,7 @@ export class CreateRouteComponent {
     const items = this.items();
     this.mapService.loadRoutes(depot, vehicles, items);
 
-    // this.routesCreated.emit();
+    this.routesCreated.emit();
   }
 
   clearRoutes(): void {
