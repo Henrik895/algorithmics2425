@@ -1,0 +1,30 @@
+<div class="w-full h-screen flex flex-col">
+    <div class="w-full h-fit bg-background p-4 flex flex-col border-b border-white">
+        <h1 class="text-white text-3xl font-bold">Cargo Delivery Planner</h1>
+        <h5 class="text-white">Algorithmics project 24/25</h5>
+    </div>
+    <div class="bg-background w-full grow grid grid-cols-5">
+        <div class="col-span-4">
+            <router-outlet/>
+        </div>
+        <div class="col-span-1 flex flex-col gap-2 text-white border-l border-white p-2">
+            <div class="flex items-center gap-2 border-b">
+                <span 
+                    class="p-1 cursor-pointer border-x border-t rounded-t-md"
+                    [ngClass]="{'border-white': !showRouteInfo, 'border-background': showRouteInfo}"
+                    (click)="onHideRouteInfo()">Create new
+                </span>
+                <span 
+                    class="p-1 cursor-pointer border-x border-t rounded-t-md" 
+                    [ngClass]="{'border-white': showRouteInfo, 'border-background': !showRouteInfo}"
+                    (click)="onShowRouteInfo()">Route info
+                </span>
+            </div>
+            @if (showRouteInfo) {
+                <app-route-details></app-route-details>
+            } @else {
+                <app-create-route (routesCreated)="onShowRouteInfo()"></app-create-route>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+@let routes = routes$ | async;
+@if (routes) {
+    <div class="flex flex-col gap-2">
+        @let depot = routes.depot;
+        @for (route of routes.routes; track $index) {
+            <div class="flex flex-col gap-2 p-1 border rounded-sm">
+                <div class="flex items-center self-center gap-2">
+                    <span class="material-icons">local_shipping</span>
+                    <span>{{ route.vehicle.name }} ({{ route.vehicle.capacity }}t)</span>
+                </div>
+                <div class="flex gap-2">
+                    <div class="flex flex-col">
+                        <span class="material-icons">circle</span>
+                        <span class="material-icons">more_vert</span>
+                        @for (item of route.items; track $index) {
+                            <span class="material-icons">circle</span>
+                            <span class="material-icons">more_vert</span>
+                        }
+                        <span class="material-icons">circle</span>
+                    </div>
+                    <div class="flex flex-col gap-6">
+                        <span>{{ depot }}</span>
+                        @for (item of route.items; track $index) {
+                            <span>{{ item.destination }}</span>
+                        }
+                        <span>{{ depot }}</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+} @else {
+    <div class="w-full flex items-center justify-center">
+        <span class="text-orange-400">Routes have not been created yet!</span>
+    </div>
+}
+    
